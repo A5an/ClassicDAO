@@ -225,66 +225,75 @@
   </div>
 
 
+
+
+
+
   <div class="body" style="flex-grow: 1; background-color: #000;">
+    <div style="display: flex; margin: 0 150px; height: 100%;  flex-direction: column; align-items: center;">
+    <h1 style="font-size: 72px; font-family: GTWalsheim, bold; color: #fff; align-self: center; text-align: center;">Proposals of all time</h1>
+     
+    
 
-
-    <h1 style="font-size: 72px; font-family: GTWalsheim, bold; margin-left: 150px; color: #fff; margin-bottom: 10px;">Current Proposal</h1>
-    <div class="container" style="display: flex; flex-direction: column; min-height: 200px; border: 2px solid #fff; margin: 0 150px; padding: 40px; border-radius: 16px;">
-      <div style="display: flex; justify-content: space-between;">
-        <span style="font-size: 20px; color: #fff; font-family: GTWalsheim2, regular;">Prop ID 2309646343</span>
-        <span style="font-size: 20px; color: #fff; font-family: GTWalsheim2, regular;">Vote Ends 2 days 5 hours</span>
-    </div>
-      <div style="display: flex; margin-top: 20px;">
-          <img src="public/external/tq_54scrkwlyz-jmz-200h.png" alt="Icon" style="width: 60px; height: 60px;">
-          <p style="font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 20px;">0xB5...9831</p>
-      </div>
-
-      <h1 style="font-size: 36px; margin-top: 20px; font-family: GTWalsheim, bold; color: #fff;">Ratification Poll for MIP Amendment Subproposals - Article 1 Edits (MIP102c2-SP17)</h1>
-      <p style="font-size: 20px; margin-top: 3px; font-family: GTWalsheim, bold; color: #fff;">Setting PSM-GUSD-A Debt Ceiling to zero and removing from AutoLine, Coinbase Custody (RWA014-A) Debt Ceiling increase, WBTC-A, WBTC-B, and WBTC-C Stability Fee changes, SBE parameter changes, RWA Foundation Dao Resolution, Andromeda Legal Expenses, Cancel Vesting Streams for Steakhouse and TechOps, Set up Ecosystem Facilitator Vesting Streams and Spark proxy-spell</p>
-  
-      <div style="display: flex; margin-top: 20px; justify-content: space-between;">
-    <button class="view_button" id="view_more">View Proposal</button>
-    <script>
-      document.getElementById('view_more').addEventListener('click', function() {
-        window.location.href = 'CurrentProposal.html';
-      });
-    </script>
-    <button style="width: auto; background-color: #fff; color: #000; border: 2px solid #000; padding: 5px 10px; border-radius: 10px; font-size: 20px; font-family: GTWalsheim2, regular; cursor: pointer; margin-top: 10px; height: 45px;" disabled>SIMPLE</button>
- </div>  
-
-  </div> 
-
-
-
-<div class="container-treasury" style="margin-top: 80px;">
-  <div style="display: flex; justify-content: space-between; margin-left: 150px; margin-right: 150px;">
-        <span style="font-size: 20px; color: #fff; font-family: GTWalsheim2, regular;">Governance Stats</span>
-        <div style="display: flex;">
-        <span style="font-size: 20px; color: #fff; font-family: GTWalsheim2, regular;">View more</span>
-        <div style="position: relative; width: 11px; height: 11px; margin-top: 3px; margin-left: 4px;">
-        <img src="public/external/line.svg" class="diagonal-line" style="position: absolute; top: 0; left: 0.49px; width: 100%; height: 100%;">
-        <img src="public/external/arrow.svg" class="arrow-head" style="position: absolute; top: 0; right: 0; width: 100%; height: 100%;">
+    <div style="display: flex; margin-top: 40px; width: 80%;">
+        <input placeholder="Search..." class="rangeIncentive" id="newNickname" style="margin-right: 10px; flex: 5; box-sizing: border-box; padding-left: 40px; font-size: 20px; height: 50px; background-color: rgb(0, 0, 0); border: 2px solid white; border-radius: 10px; color: white; background-size: 20px; background-image: url('public/external/icons8-search.svg'); background-repeat: no-repeat; background-position: 10px center;">
+    <div class="menu-container-search" style="position: relative; display: inline-block; width: fit-content;">
+        <button class="view_button" id="search_button" style="height: 50px; margin-top: 0; flex: 1;">All Proposals</button>
+        <div class="dropdown-menu-search" style="display: none; background-color: white; color: black; position: absolute; left: 0; padding: 10px; margin-top: 5px; width: 100%; border-radius: 10px; box-sizing: border-box;">
+            <a onclick="updateButton(this)" style="text-decoration: none; color: black; display: flex; justify-content: center; align-items: center; font-size: 18px; height: 30px; margin-bottom: 10px; margin-top: 5px;">&#10004; All Proposals</a>
+            <a onclick="updateButton(this)" style="text-decoration: none; color: black; display: flex; justify-content: center; align-items: center; font-size: 18px; height: 30px; margin-bottom: 10px; margin-top: 5px;">Past Proposals</a>
+            <a onclick="updateButton(this)" style="text-decoration: none; color: black; display: flex; justify-content: center; align-items: center; font-size: 18px; height: 30px; margin-bottom: 5px; margin-top: 10px;">Future Proposals</a>
         </div>
-  </div>
-   
-  </div>
+    </div>
 
-  <div class="table" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; min-height: 100px; border: 2px solid #fff; margin: 0 150px; padding-top: 40px; padding-bottom: 40px; border-radius: 16px; margin-top: 20px;">
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 25px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 1</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 25px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 2</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 25px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 3</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 25px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 4</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 25px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 5</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 6</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 7</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 8</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 9</div>
-    <div style="display: flex; justify-content: flex-start; align-items: center; font-size: 20px; color: #fff; font-family: GTWalsheim2, regular; margin-left: 40px;">Content 10</div>
+    <script>
+    function updateButton(element) {
+        document.getElementById('search_button').innerText = element.innerText.replace('✔ ', '');
+
+        var options = document.querySelectorAll('.dropdown-menu-search a');
+        options.forEach(function(option) {
+            option.innerText = option.innerText.replace('✔ ', '');
+        });
+
+        element.innerText = '✔ ' + element.innerText;
+    }
+    </script>
+
+    </div>
+    <div style="margin-top:10vh; width: 80%; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between; padding: 20px; color: #fff; box-sizing: border-box;">
+            <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Title</div>
+            <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">ID</div>
+            <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Type</div>
+            <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Timeline</div>
+            <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;"></div>
+        </div>
+        <div style="border:1.81818px solid rgb(255, 255, 255);border-radius:8px;background:rgb(0, 0, 0);box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; align-items:center; padding: 16px 20px; border-bottom:1.81818px solid rgb(255, 255, 255); font-size:16px; color:rgb(255, 255, 255); box-sizing: border-box;">
+                <div style="flex: 1;">Create new des...</div>
+                <div style="flex: 1;">3241345241234</div>
+                <div style="flex: 1;">
+                    <button style="width: auto; background-color: #16ECD3; color: #000; border: 2px solid #000; padding: 0px 10px; border-radius: 10px; font-size: 18px; font-family: GTWalsheim2, regular; cursor: pointer; height: 30px;" disabled>Active</button>
+                </div>
+                <div style="flex: 1;">12/27 17:00 ~ 01/06 17:00</div>
+                <div style="flex: 1; display: flex; justify-content: flex-end;">
+                    <a href="CurrentVoting.html" style="text-decoration: none; color: inherit; outline: none;">
+                    <button class="view_more_button">View more</button>             
+                    </a>
+                </div>
+            </div>
+            <div style="height:60px; box-sizing: border-box;">
+                <div style="display:flex;align-items:center;justify-content:center;width: 100%;height:60px;box-sizing: border-box;">
+                    <div style="height:60px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; color: #fff;">
+                        <p>Page 1 of 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
   </div>
-</div>
-</div>
-
-
 
 
 
@@ -348,6 +357,16 @@
 
     document.querySelector('.menu-container-vote').addEventListener('mouseout', function() {
         var dropdown = document.querySelector('.dropdown-menu-vote');
+        dropdown.style.display = 'none';
+    });
+
+    document.querySelector('.menu-container-search').addEventListener('mouseover', function() {
+        var dropdown = document.querySelector('.dropdown-menu-search');
+        dropdown.style.display = 'block';
+    });
+
+    document.querySelector('.menu-container-search').addEventListener('mouseout', function() {
+        var dropdown = document.querySelector('.dropdown-menu-search');
         dropdown.style.display = 'none';
     });
 </script>

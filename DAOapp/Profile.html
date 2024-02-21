@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ClassicDAO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+
+        @font-face {
+            font-family: 'GTWalsheim';
+            src: url('fonts/GT\ WALSHEIM\ REGULAR-NORMAL-400-100.TTF');
+        }
+
+        @font-face {
+            font-family: 'GTWalsheim2';
+            src: url('fonts/GT-Walsheim-Regular-Trial-BF651b7fc71a47d.otf');
+        }
+
+        .view_button, .plus, .view_button2 {
+            background-color: #16ECD3;
+            color: #000;
+            border: 2px solid #000;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: GTWalsheim2, regular;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 190px;
+            height: 45px;
+            transition: all 0.3s ease;
+        }
+
+        .view_button:hover, .view_button2:hover {
+            background-color: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .button, .hamburger {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover,.buttonConnect:hover, .hamburger:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .buttonConnect  {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger {
+            padding: 6px;
+        }
+
+        .hamburger:hover img, .plus:hover {
+            filter: invert(1);
+        }
+
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #292929;
+        }
+
+        body::-webkit-scrollbar-thumb  {
+            background: rgba(17, 17, 17, 0.5);
+            border-radius: 20px;
+        }
+
+        .popup::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .popup::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 0;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .popup::-webkit-scrollbar-thumb {
+            background: rgba(54, 54, 54, 0.5);
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .dropdown-menu-hamburger a {
+            padding: 5px;
+        }
+
+        .dropdown-menu-hamburger a:hover {
+            background-color: #ddd;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .dropdown-menu-vote a, .dropdown-menu-search a {
+            padding: 5px;
+        }
+
+        .dropdown-menu-vote a:hover, .dropdown-menu-search a:hover {
+        background-color: #ddd; 
+        color: black; 
+        border-radius: 5px;
+        }
+
+        
+        .progress-bar {
+          width: 100%;
+          background-color: #f3f3f3;
+          border-radius: 13px;
+          overflow: hidden;
+        }
+
+        .progress-bar-fill {
+          height: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          width: 0;
+          background-color: rgb(15, 216, 15);
+          transition: width 0.2s;
+        }
+
+        .progress-bar-fill.red {
+          background-color: red;
+        }
+
+        .rangeIncentive::-webkit-inner-spin-button,
+        .rangeIncentive::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        .rangeIncentive {
+        -moz-appearance: textfield;
+        }
+
+        .view_more_button {
+            background-color: #fff;
+            color: #000;
+            border: 2px solid #000;
+            padding: 0px 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-family: GTWalsheim2, regular;
+            cursor: pointer;
+            height: 30px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .view_more_button:hover {
+            background-color: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+
+    </style>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+</head>
+<body style="font-family: GTWalsheim2, regular; margin: 0;  overflow-x: hidden; padding: 0; display: flex; flex-direction: column; min-height: 100vh;">
+  <div class="header" style=" z-index: 1000; position: sticky; top: 0; background-color: #000; font-family: GTWalsheim2, regular; color: #fff; border-bottom: 1px solid #fff;"> 
+    <div class="header-container"  style="display: flex; font-family: GTWalsheim2, regular; justify-content: space-between; align-items: center; margin-left: 150px; margin-right: 150px;">
+         
+        <div class="logo-and-tabs" style="display: flex; justify-content: flex-start; align-items: center; width: 100%;">
+              <div class="logo" style="display: flex; align-items: center; margin-left: -5px;">
+                <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                  <img src="public/external/cldblue11804-k4uw-200h.png" alt="Logo" style="margin-right: 10px;">
+                  <h1 style="color: #fff;">ClassicDAO</h1>
+                </a>
+              </div>
+
+              <div class="tabs" style="display: flex; margin-left: 20px; gap: 10px; ">
+                <a href="Profile.html" id="proposingButton" style="text-decoration: none; color: inherit; outline: none;">
+                <button  class="button">Proposing</button>
+                 </a>
+                <div class="menu-container-vote" style="position: relative; display: inline-block;">
+                  <button id="votingButton" class="button">Voting</button>
+                  <div class="dropdown-menu-vote" style="display: none; background-color: white; color: black; position: absolute; right: 0; padding: 10px; margin-top: 5px; width: max-content; border-radius: 10px;">
+                    <a href="CurrentVoting.html" style="text-decoration: none; color: black; display: block; margin-bottom: 10px; margin-top: 5px;">Current</a>
+                    <a href="PastAndUpcomingProposals.html" style="text-decoration: none; color: black; display: block; margin-bottom: 5px; margin-bottom: 10px;">All</a>
+                   </div>
+                </div>
+                <a href="Treasury.html" id="treasuryButton" style="text-decoration: none; color: inherit; outline: none;">
+                <button class="button">Treasury</button>
+            </a>
+            <a href="Sales.html" id="salesButton" style="text-decoration: none; color: inherit; outline: none;">
+                <button class="button">Sales</button>
+            </a>
+               </div>
+          </div>
+
+          <div class="connect-and-hamburger" style="display: flex; justify-content: space-between; align-items: center;">
+            <button id="buttonConnect" class="buttonConnect">Connect</button>
+            <div class="menu-container" style="position: relative; display: inline-block;">
+              <button class="hamburger" style="align-items: center;">
+                  <img src="public/external/iconmenu1804-38fa.svg" alt="Menu" style="width: 22px; height: 22px; margin-bottom: -3px;">
+              </button>
+              <div class="dropdown-menu-hamburger" style="margin-top: 5px; display: none; background-color: white; color: black; position: absolute; right: 0; padding: 10px; width: max-content; border-radius: 10px;">
+                <a href="Profile.html" style="text-decoration: none; color: black; display: block; margin-bottom: 10px; margin-top: 5px;">Profile</a>
+                <a href="#" style="text-decoration: none; color: black; display: block; margin-bottom: 5px;">Simple mode</a>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+
+<div class="body" style=" flex-grow: 1; background-color: #000; height: 100vh;">
+    <div style="display: flex; justify-content: space-between; margin: 0 150px; height: 100%;">
+        <div style="flex: 1.5; padding-right: 20px;">
+            <h1 style="font-size: 72px; font-family: GTWalsheim, bold; color: #fff; align-self: center; margin-bottom: 0;">Profile</h1>
+            
+        <div style="display: flex; flex-direction: column; align-items: flex-start; width: fit-content;">
+    <div style="display: flex; align-items: center; margin-top: 30px;">
+        <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; margin-right: 40px;">
+            <img id="userImage" src="public/external/tq_54scrkwlyz-jmz-200h.png" alt="User" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s;">
+            <div id="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;">
+                <img src="public/external/edit-button-svgrepo-com.svg" alt="Edit" style="width: 50px; height: 50px;">
+            </div>
+            <input type="file" id="imageInput" style="display: none;" accept="image/*">
+        </div>
+
+        <script>
+            var overlay = document.getElementById('overlay');
+            var userImage = document.getElementById('userImage');
+            var imageInput = document.getElementById('imageInput');
+
+            overlay.addEventListener('mouseover', function() {
+                overlay.style.opacity = 1;
+            });
+
+            overlay.addEventListener('mouseout', function() {
+                overlay.style.opacity = 0;
+            });
+
+            overlay.addEventListener('click', function() {
+                imageInput.click();
+            });
+
+            imageInput.addEventListener('change', function() {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    userImage.src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+        </script>
+
+        <div>
+            <div style="display: flex; align-items: center;">
+                <h1 id="nickname" style="font-size: 34px; margin: 0px 0px 0px 20px; font-family: GTWalsheim, bold; color: #fff;">Nickname</h1>
+                <button id="editNickname" style="background: none; border: none; cursor: pointer; margin-left: 5px;">
+                    <img src="public/external/edit-button-svgrepo-com.svg" alt="Edit" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+            <p style="font-size: 20px; margin: 0px 0px 0px 20px; font-family: GTWalsheim, bold; color: #fff;">0xB5...43a8</p> 
+
+            
+        </div>     
+    </div>
+
+
+        <input placeholder="Enter your new nickname" class="rangeIncentive" id="newNickname" style="display: none; box-sizing: border-box; padding-left: 10px; width: 100%; font-size: 20px; height: 45px; margin-top: 50px; background-color: rgb(0, 0, 0); border: 2px solid white; border-radius: 10px; color: white;"> 
+        <button class="view_button" id="saveButton" style=" display: none; margin-top: 20px; width: 100%;">Save Profile</button>
+    
+    
+   
+        <button class="view_button" id="CreateProposal" style="margin-top: 50px; margin-left: 0; padding-left: 0; height: 45px; width: 100%;">Create Proposal</button>
+  
+
+    <script>
+        var newNickname = document.getElementById('newNickname');
+        var saveButton = document.getElementById('saveButton');
+        var CreateProposal = document.getElementById('CreateProposal');
+        var editNickname = document.getElementById('editNickname');
+
+        var isEditing = false;
+
+        editNickname.addEventListener('click', function() {
+            if (isEditing) {
+                // Hide the nickname editor and reset the margin-top of the CreateProposal button
+                saveButton.style.display = 'none';
+                newNickname.style.display = 'none';
+                CreateProposal.style.marginTop = '50px';
+            } else {
+                // Show the nickname editor and reduce the margin-top of the CreateProposal button
+                saveButton.style.display = 'block';
+                newNickname.style.display = 'block';
+                CreateProposal.style.marginTop = '20px';
+            }
+
+            // Flip the isEditing flag
+            isEditing = !isEditing;
+        });
+    </script>
+
+        </div>
+
+    </div>
+
+
+        <div style="flex: 3; padding-left: 5%; border-left: 1px solid #fff;">
+            <h1 style="font-size: 72px; font-family: GTWalsheim, bold; color: #fff; align-self: center; margin-bottom: 0;">Your Proposals</h1>
+            <div style="display: flex; margin-top: 40px;">
+                <input placeholder="Search..." class="rangeIncentive" id="newNickname" style="margin-right: 10px; flex: 5; box-sizing: border-box; padding-left: 40px; font-size: 20px; height: 50px; background-color: rgb(0, 0, 0); border: 2px solid white; border-radius: 10px; color: white; background-size: 20px; background-image: url('public/external/icons8-search.svg'); background-repeat: no-repeat; background-position: 10px center;">
+                <button class="view_button" id="search_button" style="height: 50px; margin-top: 0; flex: 1;">Search</button>
+            </div>
+
+            <div style="margin-top:10vh; width: 100%; box-sizing: border-box;">
+                <div style="display: flex; justify-content: space-between; padding: 20px; color: #fff; box-sizing: border-box;">
+                    <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Title</div>
+                    <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">ID</div>
+                    <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Type</div>
+                    <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;">Timeline</div>
+                    <div style="flex: 1; font-family: GTWalsheim, bold; font-weight:700;"></div>
+                </div>
+                <div style="border:1.81818px solid rgb(255, 255, 255);border-radius:8px;background:rgb(0, 0, 0);box-sizing: border-box;">
+                    <div style="display: flex; justify-content: space-between; align-items:center; padding: 16px 20px; border-bottom:1.81818px solid rgb(255, 255, 255); font-size:16px; color:rgb(255, 255, 255); box-sizing: border-box;">
+                        <div style="flex: 1;">Create new des...</div>
+                        <div style="flex: 1;">3241345241234</div>
+                        <div style="flex: 1;">
+                            <button style="width: auto; background-color: #16ECD3; color: #000; border: 2px solid #000; padding: 0px 10px; border-radius: 10px; font-size: 18px; font-family: GTWalsheim2, regular; cursor: pointer; height: 30px;" disabled>Active</button>
+                        </div>
+                        <div style="flex: 1;">12/27 17:00 ~ 01/06 17:00</div>
+                        <div style="flex: 1; display: flex; justify-content: flex-end;">
+                            <a href="CurrentVoting.html" style="text-decoration: none; color: inherit; outline: none;">
+                            <button class="view_more_button">View more</button>             
+                            </a>
+                        </div>
+                    </div>
+                    <div style="height:60px; box-sizing: border-box;">
+                        <div style="display:flex;align-items:center;justify-content:center;width: 100%;height:60px;box-sizing: border-box;">
+                            <div style="height:60px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; color: #fff;">
+                                <p>Page 1 of 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 2;" id="overlay2">
+    <div style="color: #fff; width: 80%; max-width: 800px; border: 2px solid #fff; border-radius: 16px; overflow-x: hidden; overflow-y: auto; max-height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #000; padding: 40px; z-index: 3; cursor: auto;" class="popup">
+        <h2 style="margin-top: 0; margin-bottom: 0; text-align: center; font-size: 36px;">Create the Propsal</h2>
+      <p style="font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Title</p>
+
+    <input placeholder="Enter the Title of the Proposal" class="rangeIncentive" id="TitleInput" style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+      <p style="font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Description</p>
+    
+      <div style="padding-left: 10px; padding-bottom: 10px; padding-top: 10px; width: 100%; font-size: 20px; box-sizing: border-box; color: #fff; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; min-height: 200px;" contenteditable="true" id="richTextInput" onfocus="removePlaceholder(this)" onblur="addPlaceholder(this)">Enter text here...</div>
+
+    <script>
+    function removePlaceholder(element) {
+        if (element.innerText === 'Enter text here...') {
+            element.innerText = '';
+            element.style.color = '#fff';
+        }
+    }
+
+    function addPlaceholder(element) {
+        if (element.innerText === '') {
+            element.innerText = 'Enter text here...';
+            element.style.color = '#777';
+        }
+    }
+    </script>
+    
+    <p style="font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Schedule</p>
+    <div class="shedule" style="border: 2px solid #fff; padding: 30px; border-radius: 16px; margin-top: 5px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <span style="font-size: 20px;">Starts</span>
+                <div class="shedule1" style="border: 2px solid #fff; padding: 10px; border-radius: 10px; display: flex; align-items: center; margin-top: 5px; cursor: pointer; user-select: none; transition: transform 0.1s;" onclick="myFunction()" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">  <img src="public/external/calendar.svg" alt="Calendar Icon" style="height: 35px; width: 35px;"> 
+                    <span class="date-text" style="font-size: 20px; margin-left: 10px;">2024/02/21 00:30 (UTC+06:00)</span>
+                </div>
+            </div>
+            <div>
+                <span style="font-size: 20px;">Ends</span>
+                <div class="shedule2" style="border: 2px solid #fff; padding: 10px; border-radius: 10px; display: flex; align-items: center; margin-top: 5px; cursor: pointer; user-select: none; transition: transform 0.1s;" onclick="myFunction()" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">
+                    <img src="public/external/calendar.svg" alt="Calendar Icon" style="height: 35px; width: 35px;"> 
+                    <span class="date-text" style="font-size: 20px; margin-left: 10px;">2024/02/21 00:30 (UTC+06:00)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <p style="font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Target Contract</p>
+    <select id="TargetContract" style="width: 100%; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+        <optgroup label="DAO Contracts">
+            <option value="Core">Core</option>
+            <option value="Voting">Voting</option>
+            <option value="Sales">Sales</option>
+            <option value="Treasury">Treasury</option>
+        </optgroup>
+        <optgroup label="External Contracts">
+            <option value="ErosProposal">Eros Proposal</option>
+            <option value="ProxyProposal">Proxy Proposal</option>
+        </optgroup>
+    </select>
+
+
+ 
+    <div id="Core" style="display: none;">
+    <p style="font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Function to Execute</p>   
+    <select class="sub-select" id="selectorCore" style=" width: 100%; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+        <option value="New Treasury contract address">Replace Treasury</option>
+        <option value="New Voting contract address">Replace Voting</option>
+        <option value="New Core contract address">Replace Core</option>
+        <option value="New Sales contract address">Replace Sale (missing in SC)</option>
+    </select>
+    </div>
+
+  
+    <div id="Voting" style="display: none;">
+        <p style=" font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Function to Execute</p>   
+       
+    <select class="sub-select" id="selectorVoting" style=" width: 100%; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+        <option value="Change proposal CLD cost (in CLD amount)">Change proposal cost</option>
+        <option value="Change proposal required quorum (in Basis Points)">Change default quorum</option>
+    </select>
+    </div>
+    <div id="Sales" style="display: none;">
+        <p style=" font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Function to Execute</p>       
+    <select class="sub-select" id="selectorSales" style=" width: 100%; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+        <option value="CLD Amount to Sale">Start sale</option>
+        <option value="New Foundation Sale fee (in Basis Points)">Change Sales Foundation fee</option>
+        <option value="New Foundation Sale fee (in Basis Points)">Change Sales Retract fee</option>
+        <option value="New Minimum Sale deposit (in CLD amount)">Change Sales minimum deposit</option>
+        <option value="New Default Sale length (in days)">Change default Sale length</option>
+        <option value="New Max Sale percent">Change Sales max percent</option>
+    </select>
+    </div>
+    <div id="Treasury" style="display: none;">
+        <p style=" font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Function to Execute</p>   
+       
+    <select class="sub-select" id="selectorTreasury" style=" width: 100%; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+        <option value="option1">Send Asset</option>
+        <option value="option2">Send Ether</option>
+        <option value="option3">Register Asset</option>
+        <option value="option4">Change Registered Asset Limit</option>
+    </select>
+    </div>
+
+
+    <input placeholder="New Treasury contract address" class="rangeIncentive" id="CoreInput" style="display: none; padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+    
+    <div id="EROS" style="display: none;">
+        <input placeholder="Contract Address" class="rangeIncentive" id="ContractAddress" style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between;">
+            <input placeholder="Function to be called" class="rangeIncentive" id="ContractFunction" style="flex: 1; padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+            <input placeholder="Function parameters, separated by comma" class="rangeIncentive" id="ContractFunctionParameters" style="margin-left: 5px; flex: 3; padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        </div>
+    </div>
+
+
+
+    <div id="Treasurythings1" style="display: none;">
+        <input placeholder="Reciever Wallet" class="rangeIncentive" style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between;">
+            <select style=" width: 100%; flex: 1; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+                <option value="option1">Asset1</option>
+                <option value="option2">Asset1</option>
+                <option value="option3">Asset1</option>
+                <option value="option4">Asset1</option>
+                <option value="option5">Asset1</option>
+            </select>
+             <input type="number" placeholder="Amount to send" class="rangeIncentive"  style="margin-left: 5px; flex: 3; padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        </div>
+    </div>
+    <div id="Treasurythings2" style="display: none;">
+        <input placeholder="Reciever Wallet" class="rangeIncentive" style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        <input type="number" placeholder="Amount to send" class="rangeIncentive"  style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+       
+    </div>
+    <div id="Treasurythings3" style="display: none;">
+        <div style="display: flex; justify-content: space-between;">
+            <select style=" width: 100%; flex: 1; border: 2px solid #ffffff; background-color: #000; color: #fff; padding: 10px; border-radius: 10px; margin-top: 5px; font-size: 20px;">
+                <option value="option1">Asset1</option>
+                <option value="option2">Asset1</option>
+                <option value="option3">Asset1</option>
+                <option value="option4">Asset1</option>
+                <option value="option5">Asset1</option>
+            </select>
+             <input placeholder="New asset contract address" class="rangeIncentive"  style="margin-left: 5px; flex: 3; padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+        </div>
+    </div>
+    <div id="Treasurythings4" style="display: none;">
+        <input placeholder="New asset limit" class="rangeIncentive" style="padding-left: 10px; width: 100%; font-size: 20px; height: 50px; margin-top: 5px; background-color: rgb(0,0,0); border: 2px solid white; border-radius: 10px; color: white; box-sizing: border-box;">
+    </div>
+
+
+
+  
+
+
+  
+    <script>
+    window.onload = function() {
+        var mainSelector = document.getElementById('TargetContract');
+        var erosDiv = document.getElementById('EROS');
+        var buttons = document.getElementById('buttons');
+        var input = document.getElementById('CoreInput'); 
+
+        var subSelects = {
+            'Core': document.getElementById('selectorCore'),
+            'Voting': document.getElementById('selectorVoting'),
+            'Sales': document.getElementById('selectorSales'),
+            'Treasury': document.getElementById('selectorTreasury') 
+        };
+
+        mainSelector.addEventListener('change', function() {
+            
+            var divs = ['Core', 'Voting', 'Sales', 'Treasury', 'Treasurythings1', 'Treasurythings2', 'Treasurythings3', 'Treasurythings4'];
+            for (var i = 0; i < divs.length; i++) {
+                document.getElementById(divs[i]).style.display = 'none';
+            }
+
+            
+            var selectedOption = this.options[this.selectedIndex].value;
+            if (divs.includes(selectedOption)) {
+                document.getElementById(selectedOption).style.display = 'block';
+            }
+
+            
+            if (selectedOption === 'ErosProposal' || selectedOption === 'ProxyProposal') {
+                erosDiv.style.display = 'block';
+                buttons.style.display = 'block';
+            } else {
+                erosDiv.style.display = 'none';
+                buttons.style.display = 'none';
+            }
+
+            
+            if (selectedOption === 'Core' || selectedOption === 'Voting' || selectedOption === 'Sales' || selectedOption === 'Treasury') {
+                input.style.display = 'block';
+                input.placeholder = subSelects[selectedOption].options[subSelects[selectedOption].selectedIndex].value;
+            } else {
+                input.style.display = 'none';
+            }
+
+           
+            if (selectedOption === 'Treasury') {
+                var treasuryOption = subSelects['Treasury'].options[subSelects['Treasury'].selectedIndex].value;
+                if (treasuryOption === 'option1') {
+                    input.style.display = 'none';
+                    document.getElementById('Treasurythings1').style.display = 'block';
+                } else if (treasuryOption === 'option2') {
+                    input.style.display = 'none';
+                    document.getElementById('Treasurythings2').style.display = 'block';
+                } else if (treasuryOption === 'option3') {
+                    input.style.display = 'none';
+                    document.getElementById('Treasurythings3').style.display = 'block';
+                } else if (treasuryOption === 'option4') {
+                    input.style.display = 'none';
+                    document.getElementById('Treasurythings4').style.display = 'block';
+                }
+            }
+        });
+
+       
+        for (var key in subSelects) {
+            subSelects[key].addEventListener('change', function() {
+                input.placeholder = this.options[this.selectedIndex].value; 
+                mainSelector.dispatchEvent(new Event('change')); 
+            });
+        }
+
+       
+        mainSelector.dispatchEvent(new Event('change'));
+    };
+    </script>
+
+    <style>
+        .button-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+
+        .view_button2 {
+          min-width: calc(50% - 10px); 
+          max-width: 100%;
+          flex: 1;
+          box-sizing: border-box;
+          margin-top: 20px;
+        }
+        .view_button2:nth-child(even) {
+          margin-left: 20px;
+        }
+
+      </style>
+
+    <div id="buttons" style="display: none;">
+        <p style=" font-size: 22px; font-family: GTWalsheim, bold; color: #fff; margin-top: 20px; margin-bottom: 0;">Voting options</p>   
+   
+        <div class="button-container">
+            <button class="view_button2" id="vote_button_yes" >Yes</button>
+            <button class="view_button2" id="vote_button_no" style="background-color: red;">No</button>
+            <button class="view_button2" id="vote_button1" style="display: none;">Option 1</button>
+            <button class="view_button2" id="vote_button2" style="display: none;">Option 2</button>
+            <button class="view_button2" id="vote_button3" style="display: none;">Option 3</button>
+            <button class="view_button2" id="vote_button4" style="display: none;">Option 4</button>
+            <button class="view_button2" id="vote_button5" style="display: none;">Option 5</button>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+            <button id="PlusButton" class="plus" style="background-color: #fff; font-size: 20px; height: fit-content; width: fit-content;">Add</button>
+            <button id="HideButton" class="plus" style="background-color: #fff; font-size: 20px; height: fit-content; width: fit-content; display: none;">Hide</button>
+        </div>
+    </div>
+
+            
+            <script>
+            var selectedButton = null;
+
+            document.getElementById('PlusButton').addEventListener('click', function() {
+                var buttons = ['vote_button1', 'vote_button2', 'vote_button3', 'vote_button4', 'vote_button5'];
+                for (var i = 0; i < buttons.length; i++) {
+                    var button = document.getElementById(buttons[i]);
+                    if (button.style.display === 'none') {
+                        button.style.display = 'block';
+                        break;
+                    }
+                }
+            });
+
+            for (var i = 1; i <= 5; i++) {
+                document.getElementById('vote_button' + i).addEventListener('click', function() {
+                    selectedButton = this;
+                    var newText = prompt('Enter new Name for the button:');
+                    if (newText !== null) {
+                        this.textContent = newText;
+                    }
+                    document.getElementById('HideButton').style.display = 'block';
+                });
+            }
+
+            document.getElementById('HideButton').addEventListener('click', function() {
+                if (selectedButton !== null) {
+                    selectedButton.style.display = 'none';
+                }
+            });
+            </script>
+
+         <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+        <button id="close-button" class="buttonConnect" style="height: 50px; width: 150px; font-size: 18px;">Cancel</button>
+        <button id="Submit-button" class="buttonConnect" style="height: 50px; width: 150px; font-size: 18px; margin-right: -5px;">Publish</button>
+        </div>
+
+      </div>
+  </div>
+  
+  
+  <script> 
+    document.getElementById('CreateProposal').addEventListener('click', () => {
+      document.getElementById('overlay2').style.display = 'block';
+    });
+  
+  
+    document.getElementById('close-button').addEventListener('click', () => {
+      document.getElementById('overlay2').style.display = 'none';
+    });
+  
+  </script>
+
+
+
+  <div class="footer" style="background-color: #000; text-align: center; padding-top: 60px; padding-bottom: 60px; display: flex; justify-content: center;">
+    <div class="footer-container" style="display: flex; font-family: GTWalsheim2, regular; justify-content: space-between; align-items: center; color: #fff; margin: 0 150px; width: 100%;">
+      <div style="width: 30%; display: flex; align-items: center;">
+        <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="public/external/cldblue11804-dvrq-200h.png" alt="Logo" style="margin-right: 10px;">
+        <h1 style="color: #fff;">ClassicDAO</h1>
+        </a>
+      </div>
+      <div style="width: 20%;">
+        <h3 style="font-weight: bold; font-size: 20px;">Governance</h3>
+        <p>Governance FAQs</p>
+        <p>Whitepaper</p>
+      </div>
+      <div style="width: 20%;">
+        <h3 style="font-weight: bold; font-size: 20px;">Company</h3>
+        <p>Privacy Policy</p>
+        <p>Terms of Service</p>
+      </div>
+      <div style="width: 30%; display: flex; justify-content: flex-end; padding-top: 10px;">
+        <a href="https://twitter.com/ClassicDao" target="_blank">
+          <img src="public/external/icons8-twitter.svg" width="40" height="40" alt="Twitter" style="margin-right: 30px;">
+      </a>
+      <a href="https://discord.com/invite/C5Afm5hQcT" target="_blank">
+          <img src="public/external/icons8-discord (2).svg" width="40" height="40" alt="Discord" style="margin-right: 30px;">
+      </a>
+      <a href="https://t.me/ETCClassicDAO" target="_blank">
+          <img src="public/external/icons8-telegram.svg" width="40" height="40" alt="Telegram" style="margin-right: 30px;">
+      </a>
+      <a href="https://github.com/Soteria-Smart-Contracts/Harmonia_DAO_Protocol"  target="_blank">
+          <img src="public/external/icons8-github.svg" width="45" height="45" alt="Github">
+      </a>
+    </div>
+
+
+    </div>
+  </div>
+
+
+
+  <script>
+    document.querySelector('.menu-container').addEventListener('mouseover', function() {
+        var dropdown = document.querySelector('.dropdown-menu-hamburger');
+        dropdown.style.display = 'block';
+    });
+
+    document.querySelector('.menu-container').addEventListener('mouseout', function() {
+        var dropdown = document.querySelector('.dropdown-menu-hamburger');
+        dropdown.style.display = 'none';
+    });
+
+    document.querySelector('.menu-container-vote').addEventListener('mouseover', function() {
+        var dropdown = document.querySelector('.dropdown-menu-vote');
+        dropdown.style.display = 'block';
+    });
+
+    document.querySelector('.menu-container-vote').addEventListener('mouseout', function() {
+        var dropdown = document.querySelector('.dropdown-menu-vote');
+        dropdown.style.display = 'none';
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

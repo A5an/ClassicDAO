@@ -737,14 +737,23 @@
 
 
   <script>
+    function getDistanceFromElement(event, element) {
+        var rect = element.getBoundingClientRect();
+        var dx = Math.max(rect.left - event.clientX, 0, event.clientX - rect.right);
+        var dy = Math.max(rect.top - event.clientY, 0, event.clientY - rect.bottom);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
     document.querySelector('.menu-container').addEventListener('mouseover', function() {
         var dropdown = document.querySelector('.dropdown-menu-hamburger');
         dropdown.style.display = 'block';
     });
 
-    document.querySelector('.menu-container').addEventListener('mouseout', function() {
+    document.querySelector('.menu-container').addEventListener('mouseout', function(event) {
         var dropdown = document.querySelector('.dropdown-menu-hamburger');
-        dropdown.style.display = 'none';
+        if (getDistanceFromElement(event, dropdown) > 5) { 
+            dropdown.style.display = 'none';
+        }
     });
 
     document.querySelector('.menu-container-vote').addEventListener('mouseover', function() {
@@ -752,9 +761,11 @@
         dropdown.style.display = 'block';
     });
 
-    document.querySelector('.menu-container-vote').addEventListener('mouseout', function() {
+    document.querySelector('.menu-container-vote').addEventListener('mouseout', function(event) {
         var dropdown = document.querySelector('.dropdown-menu-vote');
-        dropdown.style.display = 'none';
+        if (getDistanceFromElement(event, dropdown) > 5) { 
+            dropdown.style.display = 'none';
+        }
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
